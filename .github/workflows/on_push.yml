@@ -1,0 +1,10 @@
+name: test environment variables scope
+on: [push]
+jobs:
+  test-environment-variables-scope:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: echo environment variables
+        id: echo_env
+        run: |
+          env
