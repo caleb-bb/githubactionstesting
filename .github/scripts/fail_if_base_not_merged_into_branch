@@ -13,7 +13,10 @@ then
 	success
 fi
 
-is_merged_ref=$1
+base=$1
+shift
+
+branch=$2
 shift
 
 failure(){
@@ -37,7 +40,7 @@ help_message(){
 	echo ""
 }
 
-if [[ -z $is_merged_ref ]]
+if [[ -z $base || -z $branch ]]
 then
 	echo ""
 	help_message
@@ -46,15 +49,15 @@ fi
 
 current_head=$(git rev-parse HEAD)
 
-fail_if_is_merged_ref_is_not_merged(){
-	if git merge-base --is-ancestor remotes/origin/$is_merged_ref @
+fail_if_base_is_not_merged(){
+	if git merge-base --is-ancestor remotes/origin/$base remotes/origin/$branch @
 	then
-	  echo "Your branch is up to date with $is_merged_ref."
+	  echo "$branch is up to date with $base."
 	  exit 0
 	else
-	  echo "You need to merge / rebase onto $is_merged_ref."
+	  echo "You need to merge $base into $branch, or rebase $branch onto $base."
 	  failure
 	fi
 }
 
-fail_if_is_merged_ref_is_not_merged
+fail_if_base_is_not_merged
