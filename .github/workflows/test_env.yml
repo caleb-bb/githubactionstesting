@@ -4,6 +4,11 @@ jobs:
   test-environment-variables-scope:
     runs-on: [ubuntu-latest]
     steps:
+      - name: checkout
+        id:   checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: echo environment variables
         id: echo_env
         run: |
