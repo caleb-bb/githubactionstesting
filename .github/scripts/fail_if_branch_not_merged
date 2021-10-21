@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+verbose=$(echo "$@" | grep "\-v")
+if [[ $verbose ]]
+then
+	set -x
+fi
+
+head_ref=$1
+shift
+
+is_merged_ref=$1
+shift
+
+failure(){
+	echo "Script exited with exit code 1"
+	echo ""
+	exit 1
+}
+
+help_message(){
+	echo ""
+	echo "This script takes 2 arguments."
+	echo "\$1 is the head ref"
+	echo "\$2 is the ref of the branch, the merge status of which we want"
+	echo ""
+}
+
+if [[ -z $head_ref || -z $is_merged_ref ]]
+then
+	echo ""
+	help_message
+	failure
+fi
+
+current_head=$(git rev-parse HEAD)
+
+make_sure_is_merged_ref_is_available(){
+	git checkout $is_merged_ref
+	git checkout $head_ref
+}
+
+fail_if_is_merged_ref_is_not_merged(){
+	make_sure_is_merged_ref_is_available
+	if git merge-base --is-ancestor $is_merged_ref @
+	then
+	  echo "Your branch is up to date."
+	  exit 0
+	else
+	  echo "You need to merge / rebase."
+	  failure
+	fi
+}
+
+fail_if_is_merged_ref_is_not_merged
