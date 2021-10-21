@@ -9,6 +9,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - name: echo environment variables
         id: echo_env
         run: |
@@ -17,7 +18,17 @@ jobs:
           echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
           echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
           echo "GITHUB_ACTION_REF $GITHUB_ACTION_REF"
+
       - name: git log
         id: git_log 
         run: |
           git log
+
+      - name: echo environment variables 2
+        id: echo_env_2
+        run: |
+          echo "GITHUB_SHA        $GITHUB_SHA"
+          echo "GITHUB_REF        $GITHUB_REF"
+          echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
+          echo "GITHUB_ACTION_REF $GITHUB_ACTION_REF"
