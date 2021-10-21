@@ -37,7 +37,7 @@ jobs:
         id: fail_if_pr_base_not_merged
         if: github.base_ref != ''
         run: |
-          "$GITHUB_WORKSPACE"/.github/scripts/fail_if_base_not_merged_into_branch remotes/origin/"$GITHUB_BASE_REF" remotes/origin/"$GITHUB_HEAD_REF"
+          "$GITHUB_WORKSPACE"/.github/scripts/fail_if_base_not_merged_into_branch "remotes/origin/$GITHUB_BASE_REF" "remotes/origin/$GITHUB_HEAD_REF"
 
       - name: fail if main is not merged into branch(push/pr)
         id: fail_if_main_not_merged_push
