@@ -43,7 +43,8 @@ jobs:
         id: fail_if_main_not_merged_push
         if: github.base_ref == ''
         run: |
-          "$GITHUB_WORKSPACE"/.github/scripts/fail_if_base_not_merged_into_branch main "$GITHUB_REF" -v
+          $CURRENT_REF='$(echo $GITHUB_REF | sed 's/refs\/heads\///')'
+          "$GITHUB_WORKSPACE"/.github/scripts/fail_if_base_not_merged_into_branch main "$CURRENT_REF" -v
 
       - name: echo environment variables 3
         id: echo_env_3
