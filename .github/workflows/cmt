@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+touch foo.txt
+git add foo.txt
+git commit -m 'add file to make new commit'
+rm foo.txt
+git rm foo.txt
+git commit -m 'remove file to make new commit'
