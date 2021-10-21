@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-set -x
-
 _help=$(echo "$@" | grep "\-h\|--help")
 if [[ $_help ]]
 then
 	help_message
 	success
+fi
+
+_verbose=$(echo "$@" | grep "\-h\|--help")
+if [[ $_verbose ]]
+then
+	set -x
 fi
 
 base=$1
@@ -29,10 +33,10 @@ success(){
 
 help_message(){
 	echo ""
-	echo "This script takes 1 argument."
-	echo "\$1 is the ref of the branch, the merge status of which we want"
-	echo "Use the -h or --help flag for help"
-	echo "Use the -v flag for verbose (set -x)"
+	echo "This script takes 2 arguments."
+	echo "We want to see if \$1 is an ancestor of \$2"
+	echo "Use the -h or --help flag after the args for help"
+	echo "Use the -v or --verbose flag after the args for (set -x)"
 	echo ""
 }
 
