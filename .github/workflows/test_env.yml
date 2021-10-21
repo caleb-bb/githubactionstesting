@@ -12,4 +12,7 @@ jobs:
           echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
           echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
           echo "GITHUB_ACTION_REF $GITHUB_ACTION_REF"
-
+      - name: git log
+        id: git_log 
+        run: |
+          git log
