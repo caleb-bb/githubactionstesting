@@ -1,0 +1,10 @@
+* githubactionstesting
+For exploring Github actions
+** TODO
+[] Investigate GITHUB_EVENT_PATH
+** Github environment vars to test
+[] GITHUB_SHA
+[] GITHUB_REF
+[] GITHUB_HEAD_REF
+[] GITHUB_BASE_REF
+[] GITHUB_ACTION_REF
