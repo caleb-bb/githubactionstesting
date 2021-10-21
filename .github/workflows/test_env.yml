@@ -32,3 +32,24 @@ jobs:
           echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
           echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
           echo "GITHUB_ACTION_REF $GITHUB_ACTION_REF"
+
+      - name: fail if PR base is not merged into branch
+        id: fail_if_pr_base_not_merged
+        if: ${{ env.GITHUB_HEAD_REF }} != ""
+        run: |
+          "$GITHUB_WORKSPACE"/.github/scripts/fail_if_branch_not_merged "$GITHUB_BASE_REF"
+
+      - name: fail if main is not merged into branch(push)
+        id: fail_if_main_not_merged_push
+        if: ${{ env.GITHUB_HEAD_REF }} != ""
+        run: |
+          "$GITHUB_WORKSPACE"/.github/scripts/fail_if_branch_not_merged main
+
+      - name: echo environment variables 3
+        id: echo_env_3
+        run: |
+          echo "GITHUB_SHA        $GITHUB_SHA"
+          echo "GITHUB_REF        $GITHUB_REF"
+          echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
+          echo "GITHUB_ACTION_REF $GITHUB_ACTION_REF"
