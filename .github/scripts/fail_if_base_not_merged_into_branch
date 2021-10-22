@@ -7,7 +7,7 @@ then
 	success
 fi
 
-_verbose=$(echo "$@" | grep "\-h\|--help")
+_verbose=$(echo "$@" | grep "\-v\|--verbose")
 if [[ $_verbose ]]
 then
 	set -x
